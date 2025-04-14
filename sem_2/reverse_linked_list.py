@@ -2,23 +2,20 @@ class ListNode(object):
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
-class Solution(object):
-    def reverseList(self, head):
-        """
-        :type head: Optional[ListNode]
-        :rtype: Optional[ListNode]
-        """
-        prev = None
-        cur = head
 
-        while cur!=None:
-            next = cur.next
-            cur.next = prev
-            prev = cur
-            cur = next
-        head = prev
+def reverseList(head):
 
-        return head
+    prev = None
+    cur = head
+
+    while cur!=None:
+        next = cur.next
+        cur.next = prev
+        prev = cur
+        cur = next
+    head = prev
+
+    return head
 
 
         

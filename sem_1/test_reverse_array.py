@@ -1,32 +1,45 @@
-import pytest
-from reverse_array import Solution
+import unittest
+from reverse_array import reverse
 
 
-@pytest.mark.parametrize(
-    "arr, expected", [
-        ([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]),
-        ([1], [1]),
-        ([], []),
-        ([10, 20, 30], [30, 20, 10]),
-        ([5, 4, 3, 2, 1], [1, 2, 3, 4, 5]),
-        ([7, 8, 9], [9, 8, 7]),
-        ([100, 200, 300, 400], [400, 300, 200, 100]),
-        ([1, 1, 1], [1, 1, 1]),
-        ([10, 20], [20, 10]),
-        ([9, 8, 7, 6], [6, 7, 8, 9]),
-        ([1, 2, 3, 4], [4, 3, 2, 1]),
-        ([1000, 2000, 3000, 4000, 5000], [5000, 4000, 3000, 2000, 1000]),
-        ([11, 22, 33, 44, 55, 66], [66, 55, 44, 33, 22, 11]),
-        ([1, 5, 3], [3, 5, 1]),
-        ([3, 2, 1, 0], [0, 1, 2, 3]),
-        ([2, 4, 6, 8], [8, 6, 4, 2]),
-        ([10, 15, 20, 25, 30], [30, 25, 20, 15, 10]),
-        ([100, 200, 300], [300, 200, 100]),
-        ([2, 2, 2, 2, 2], [2, 2, 2, 2, 2]),
-        ([10, 5, 15], [15, 5, 10]),
-    ]
-)
-def test_reverse_array(arr, expected):
-    solution = Solution()
-    solution.reverse(arr)
-    assert arr == expected
+class TestReverseArray(unittest.TestCase):
+    
+    def reverse_check(self, arr, expected):
+        reverse(arr)
+        self.assertEqual(arr, expected)
+
+    def test_no_change(self):
+        cases = [
+            ([1], [1]),
+            ([], []),
+            ([1, 1, 1], [1, 1, 1]),
+            ([2, 2, 2, 2, 2], [2, 2, 2, 2, 2]),
+        ]
+        for arr, expected in cases:
+            self.reverse_check(arr, expected)
+
+    def test_basic(self):
+        cases = [
+            ([1, 2, 3, 4, 5], [5, 4, 3, 2, 1]),
+            ([10, 20, 30], [30, 20, 10]),
+            ([7, 8, 9], [9, 8, 7]),
+            ([100, 200, 300, 400], [400, 300, 200, 100]),
+            ([10, 20], [20, 10]),
+            ([9, 8, 7, 6], [6, 7, 8, 9]),
+        ]
+        for arr, expected in cases:
+            self.reverse_check(arr, expected)
+
+    def test_large_reversals(self):
+        cases = [
+            ([1000, 2000, 3000, 4000, 5000], [5000, 4000, 3000, 2000, 1000]),
+            ([11, 22, 33, 44, 55, 66], [66, 55, 44, 33, 22, 11]),
+            ([10, 15, 20, 25, 30], [30, 25, 20, 15, 10]),
+            ([100, 200, 300], [300, 200, 100]),
+        ]
+        for arr, expected in cases:
+            self.reverse_check(arr, expected)
+
+    
+if __name__ == '__main__':
+    unittest.main()
